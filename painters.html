@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painters - Find-A-Worker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style> 
+        body { font-family: 'Inter', sans-serif; } 
+        .modal-overlay { transition: opacity 0.3s ease; }
+        .modal-content { transition: transform 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-600"><i class="fas fa-briefcase mr-2"></i>Find-A-Worker</a>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="text-gray-600 hover:text-blue-600 font-medium">Login</a>
+                <a href="register.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Available Painters</h1>
+        <p class="text-lg text-gray-600 mb-8">Find and hire top-rated painting professionals in your area.</p>
+
+        <div class="bg-white p-4 rounded-lg shadow-md mb-8">
+            <div class="relative flex-grow">
+                <i class="fas fa-map-marker-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="location-search" placeholder="Filter by city..." class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+        </div>
+
+        <div id="worker-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="worker-card bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300" data-location="bhopal">
+                <div class="p-6"><div class="flex items-center mb-4"><img src="https://placehold.co/150x150/FEF3C7/B45309?text=AD" class="w-16 h-16 rounded-full mr-4" alt="Anika Desai"><div><h3 class="font-bold text-xl">Anika Desai</h3><p class="text-yellow-700">Interior & Exterior</p></div></div><div class="text-yellow-400 my-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-600 text-sm mb-4">Meticulous and clean work. Specializing in residential repaints and new color consultations.</p><button onclick="openProfileModal('Anika Desai', 'Interior & Exterior', 'https://placehold.co/150x150/FEF3C7/B45309?text=AD', '98XXXXXX21', 'anika.desai@example.com', '10 Years', 400, 'Bhopal')" class="w-full text-center block bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">View Profile</button></div>
+            </div>
+            <div class="worker-card bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300" data-location="indore">
+                <div class="p-6"><div class="flex items-center mb-4"><img src="https://placehold.co/150x150/FEF3C7/B45309?text=RG" class="w-16 h-16 rounded-full mr-4" alt="Ravi Gupta"><div><h3 class="font-bold text-xl">Ravi Gupta</h3><p class="text-yellow-700">Commercial Painting</p></div></div><div class="text-yellow-400 my-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="text-gray-600 text-sm mb-4">Experienced in large-scale commercial projects for offices, retail spaces, and buildings.</p><button onclick="openProfileModal('Ravi Gupta', 'Commercial Painting', 'https://placehold.co/150x150/FEF3C7/B45309?text=RG', '98XXXXXX22', 'ravi.gupta@example.com', '15 Years', 250, 'Indore')" class="w-full text-center block bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">View Profile</button></div>
+            </div>
+             <div class="worker-card bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300" data-location="delhi">
+                <div class="p-6"><div class="flex items-center mb-4"><img src="https://placehold.co/150x150/FEF3C7/B45309?text=SM" class="w-16 h-16 rounded-full mr-4" alt="Sunita Mishra"><div><h3 class="font-bold text-xl">Sunita Mishra</h3><p class="text-yellow-700">Decorative Finishes</p></div></div><div class="text-yellow-400 my-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-600 text-sm mb-4">Creating unique wall textures, murals, and faux finishes for a custom, artistic touch.</p><button onclick="openProfileModal('Sunita Mishra', 'Decorative Finishes', 'https://placehold.co/150x150/FEF3C7/B45309?text=SM', '98XXXXXX23', 'sunita.mishra@example.com', '12 Years', 180, 'Delhi')" class="w-full text-center block bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">View Profile</button></div>
+            </div>
+        </div>
+        <div id="no-results" class="hidden text-center py-12"><h3 class="text-2xl font-semibold text-gray-700">No Workers Found</h3><p class="text-gray-500">Try adjusting your location filter.</p></div>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12"><div class="container mx-auto p-6 text-center">&copy; 2024 Find-A-Worker. All Rights Reserved.</div></footer>
+
+    <div id="profile-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+        <div class="modal-content bg-white w-full max-w-4xl rounded-2xl shadow-xl overflow-hidden transform scale-95">
+            <div class="bg-gray-100 p-4 flex justify-between items-center border-b"><h2 class="text-xl font-bold text-gray-800">Worker Profile</h2><button onclick="closeProfileModal()" class="text-gray-600 hover:text-gray-900 text-2xl">&times;</button></div>
+            <div class="p-8 md:p-10"><div class="grid grid-cols-1 lg:grid-cols-3 gap-8"><div class="lg:col-span-1 text-center"><img id="modal-img" src="" class="w-40 h-40 rounded-full mx-auto mb-4 border-4 border-blue-200 shadow-lg"><h1 id="modal-name" class="text-3xl font-bold text-gray-900"></h1><p id="modal-title" class="text-lg text-blue-600 font-medium mb-4"></p><button class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 text-lg">Request a Quote</button></div><div class="lg:col-span-2"><div class="mb-6"><h3 class="text-xl font-bold border-b pb-2 mb-3">Contact & Location</h3><div class="text-gray-700 space-y-2"><p><i class="fas fa-phone-alt w-5 text-gray-500 mr-2"></i><span id="modal-phone"></span></p><p><i class="fas fa-envelope w-5 text-gray-500 mr-2"></i><span id="modal-email"></span></p><p><i class="fas fa-map-marker-alt w-5 text-gray-500 mr-2"></i><span id="modal-location"></span></p></div></div><div class="mb-6"><h3 class="text-xl font-bold border-b pb-2 mb-3">Experience & Stats</h3><div class="grid grid-cols-2 gap-4 text-center"><div class="bg-gray-100 p-4 rounded-lg"><p class="text-2xl font-bold text-blue-600" id="modal-experience"></p><p class="text-gray-600">Experience</p></div><div class="bg-gray-100 p-4 rounded-lg"><p class="text-2xl font-bold text-blue-600" id="modal-jobs"></p><p class="text-gray-600">Jobs Completed</p></div></div></div><div><h3 class="text-xl font-bold border-b pb-2 mb-3">About Me</h3><p class="text-gray-700 leading-relaxed">With extensive experience in the field, I am dedicated to providing high-quality, reliable service. I pride myself on professionalism and customer satisfaction.</p></div></div></div></div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('profile-modal');
+        const modalContent = modal.querySelector('.modal-content');
+        function openProfileModal(name, title, imgSrc, phone, email, experience, jobs, location) {
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-img').src = imgSrc;
+            document.getElementById('modal-phone').textContent = phone;
+            document.getElementById('modal-email').textContent = email;
+            document.getElementById('modal-experience').textContent = experience;
+            document.getElementById('modal-jobs').textContent = jobs + '+';
+            document.getElementById('modal-location').textContent = location;
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => modalContent.classList.remove('scale-95'), 50);
+        }
+        function closeProfileModal() {
+            modalContent.classList.add('scale-95');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('pointer-events-none'), 300);
+        }
+        modal.addEventListener('click', (event) => { if (event.target === modal) closeProfileModal(); });
+        const locationSearch = document.getElementById('location-search');
+        const workerCards = document.querySelectorAll('.worker-card');
+        const noResults = document.getElementById('no-results');
+        function filterWorkers() {
+            const locationQuery = locationSearch.value.toLowerCase();
+            let resultsFound = false;
+            workerCards.forEach(card => {
+                const location = card.dataset.location.toLowerCase();
+                if (location.includes(locationQuery)) {
+                    card.style.display = '';
+                    resultsFound = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            noResults.style.display = resultsFound ? 'none' : 'block';
+        }
+        locationSearch.addEventListener('input', filterWorkers);
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const location = params.get('location');
+            if (location) {
+                locationSearch.value = location;
+                filterWorkers();
+            }
+        });
+    </script>
+</body>
+</html>

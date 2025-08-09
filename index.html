@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find-A-Worker - Find Skilled Professionals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .section-fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .section-fade-in.visible { opacity: 1; transform: translateY(0); }
+        .swiper-button-next, .swiper-button-prev { color: #2563EB; background-color: white; border-radius: 50%; width: 44px; height: 44px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .swiper-button-next:after, .swiper-button-prev:after { font-size: 18px; font-weight: 900; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-600"><i class="fas fa-briefcase mr-2"></i>Find-A-Worker</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-gray-600 hover:text-blue-600">Home</a>
+                <a href="#featured-workers" class="text-gray-600 hover:text-blue-600">Workers</a>
+                <a href="#services" class="text-gray-600 hover:text-blue-600">Services</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600">About</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact Us</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="login.html" class="text-gray-600 hover:text-blue-600 font-medium">Login</a>
+                <a href="register.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700">Register</a>
+            </div>
+            <div class="md:hidden"><button id="mobile-menu-button" class="text-gray-600 focus:outline-none"><i class="fas fa-bars text-2xl"></i></button></div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+             <a href="#home" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Home</a>
+             <a href="#featured-workers" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Workers</a>
+             <a href="#services" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Services</a>
+             <a href="#about" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">About</a>
+             <a href="#contact" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Contact Us</a>
+             <div class="px-6 py-4 border-t"><a href="login.html" class="block text-center w-full mb-3">Login</a><a href="register.html" class="block text-center w-full bg-blue-600 text-white px-4 py-2 rounded-lg">Register</a></div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="relative bg-white">
+            <div class="relative z-10 container mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">Find Local Professionals for Any Job</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mb-8">Connect with trusted and skilled workers in your area. Post your job for free and get quotes in minutes.</p>
+                <div class="w-full max-w-3xl">
+                    <form id="search-form" class="bg-white p-4 rounded-lg shadow-lg flex flex-col sm:flex-row items-center gap-4">
+                        <div class="relative w-full"><i class="fas fa-briefcase absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i><input type="text" id="search-input" placeholder="What service do you need?" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></div>
+                        <div class="relative w-full"><i class="fas fa-map-marker-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i><input type="text" id="location-input" placeholder="Enter city or pincode" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></div>
+                        <button type="submit" class="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 flex items-center justify-center"><i class="fas fa-search mr-2"></i> Find</button>
+                    </form>
+                    <div id="search-message" class="mt-2 text-red-600 font-medium text-left"></div>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-cover bg-center opacity-10"></div>
+        </section>
+
+        <section id="featured-workers" class="py-20 bg-gray-100 section-fade-in">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Featured Workers</h2>
+                <div class="swiper worker-swiper">
+                    <div class="swiper-wrapper pb-12">
+                        <div class="swiper-slide"><a href="plumbers.html" class="block"><div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform"><img src="https://placehold.co/150x150/E0E7FF/4F46E5?text=AS" class="w-24 h-24 rounded-full mx-auto mb-4" alt="Arjun Sharma"><h3 class="font-bold text-xl">Arjun Sharma</h3><p class="text-blue-600">Master Plumber</p><div class="text-yellow-400 my-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div></a></div>
+                        <div class="swiper-slide"><a href="graphic-designers.html" class="block"><div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform"><img src="https://placehold.co/150x150/FEE2E2/B91C1C?text=AM" class="w-24 h-24 rounded-full mx-auto mb-4" alt="Anjali Mehta"><h3 class="font-bold text-xl">Anjali Mehta</h3><p class="text-red-600">Graphic Designer</p><div class="text-yellow-400 my-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></a></div>
+                        <div class="swiper-slide"><a href="electricians.html" class="block"><div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform"><img src="https://placehold.co/150x150/D1FAE5/047857?text=MK" class="w-24 h-24 rounded-full mx-auto mb-4" alt="Mohan Kumar"><h3 class="font-bold text-xl">Mohan Kumar</h3><p class="text-green-600">Expert Electrician</p><div class="text-yellow-400 my-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div></a></div>
+                        <div class="swiper-slide"><a href="carpenters.html" class="block"><div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform"><img src="https://placehold.co/150x150/FEF3C7/B45309?text=EV" class="w-24 h-24 rounded-full mx-auto mb-4" alt="Esha Verma"><h3 class="font-bold text-xl">Esha Verma</h3><p class="text-yellow-700">Skilled Carpenter</p><div class="text-yellow-400 my-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></a></div>
+                    </div>
+                    <div class="swiper-pagination"></div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 bg-white section-fade-in">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Explore Our Services</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+                    <a href="plumbers.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-wrench text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Plumbing</h3></a>
+                    <a href="electricians.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-bolt text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Electrical</h3></a>
+                    <a href="painters.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-paint-roller text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Painting</h3></a>
+                    <a href="cleaners.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-broom text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Cleaning</h3></a>
+                    <a href="web-developers.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-laptop-code text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Web Development</h3></a>
+                    <a href="graphic-designers.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-pen-nib text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Graphic Design</h3></a>
+                    <a href="photographers.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-camera text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Photography</h3></a>
+                    <a href="movers.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-truck text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Moving</h3></a>
+                    <a href="carpenters.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-hammer text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Carpentry</h3></a>
+                    <a href="gardeners.html" class="group text-center p-4 rounded-lg hover:bg-blue-50 hover:shadow-lg transition-all"><i class="fas fa-leaf text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold">Gardening</h3></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-choose-us" class="py-20 bg-gray-100 section-fade-in">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Choose Find-A-Worker?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-12">We provide a reliable, secure, and easy way to get your work done.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="flex flex-col items-center"><div class="bg-blue-100 text-blue-600 rounded-full w-20 h-20 flex items-center justify-center mb-4"><i class="fas fa-user-check text-3xl"></i></div><h3 class="text-xl font-semibold mb-2">Verified Professionals</h3><p class="text-gray-600">Every worker on our platform is vetted for skill, experience, and professionalism to ensure you get the best service.</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-blue-100 text-blue-600 rounded-full w-20 h-20 flex items-center justify-center mb-4"><i class="fas fa-shield-alt text-3xl"></i></div><h3 class="text-xl font-semibold mb-2">Secure Payments</h3><p class="text-gray-600">Pay securely through our platform only after the job is completed to your satisfaction.</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-blue-100 text-blue-600 rounded-full w-20 h-20 flex items-center justify-center mb-4"><i class="fas fa-headset text-3xl"></i></div><h3 class="text-xl font-semibold mb-2">24/7 Support</h3><p class="text-gray-600">Our dedicated support team is always available to help you with any questions or issues you may have.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-white section-fade-in">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2"><img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Building+Connections" alt="Building Connections" class="rounded-lg shadow-xl"></div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Mission: Bridging the Gap Between Need and Skill</h2>
+                    <p class="text-gray-700 mb-4 leading-relaxed">In today's fast-paced world, finding a trustworthy professional can be a challenge. At Find-A-Worker, we experienced this firsthand. That's why we built a platform dedicated to one simple goal: connecting you with reliable, vetted workers for any job, big or small.</p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">We are more than just a directory; we are a community built on trust and quality. For our customers, we offer peace of mind. For our skilled workers, we provide the tools to grow their business and connect with meaningful opportunities. Our mission is to empower both sides, fostering connections that build stronger communities.</p>
+                    <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-transform transform hover:scale-105">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-gray-100 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto mb-12">Have a question, feedback, or need support? We're here to help. Fill out the form below, and our team will get back to you shortly.</p>
+                </div>
+                <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                    <form action="https://formspree.io/f/mnnzzlpd" method="POST">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <input type="text" name="name" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <input type="email" name="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <input type="text" name="subject" placeholder="Subject" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <textarea name="message" placeholder="Your Message" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-transform transform hover:scale-105">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white"><div class="container mx-auto px-6 py-12"><div class="grid grid-cols-1 md:grid-cols-4 gap-8"><div><h3 class="text-lg font-bold mb-4">Find-A-Worker</h3><p class="text-gray-400">Connecting you with skilled professionals.</p></div><div><h3 class="text-lg font-semibold mb-4">Links</h3><ul class="space-y-2"><li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li><li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li></ul></div><div><h3 class="text-lg font-semibold mb-4">Legal</h3><ul class="space-y-2"><li><a href="#" class="text-gray-400 hover:text-white">Terms</a></li><li><a href="#" class="text-gray-400 hover:text-white">Privacy</a></li></ul></div><div><h3 class="text-lg font-semibold mb-4">Follow Us</h3><div class="flex space-x-4"><a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-facebook-f"></i></a><a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a><a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-linkedin-in"></i></a></div></div></div><div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">&copy; 2024 Find-A-Worker. All Rights Reserved.</div></div></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const serviceQuery = document.getElementById('search-input').value.toLowerCase().trim();
+            const locationQuery = document.getElementById('location-input').value.toLowerCase().trim();
+            const messageEl = document.getElementById('search-message');
+            messageEl.textContent = '';
+            const serviceMap = {
+                'plumber': 'plumbers.html', 'plumbing': 'plumbers.html',
+                'electrician': 'electricians.html', 'electrical': 'electricians.html',
+                'painter': 'painters.html', 'painting': 'painters.html',
+                'cleaner': 'cleaners.html', 'cleaning': 'cleaners.html',
+                'web': 'web-developers.html', 'developer': 'web-developers.html',
+                'design': 'graphic-designers.html', 'designer': 'graphic-designers.html',
+                'photo': 'photographers.html', 'photographer': 'photographers.html',
+                'mover': 'movers.html', 'moving': 'movers.html',
+                'carpenter': 'carpenters.html', 'carpentry': 'carpenters.html',
+                'gardener': 'gardeners.html', 'gardening': 'gardeners.html'
+            };
+            let pageFound = false;
+            for (const keyword in serviceMap) {
+                if (serviceQuery.includes(keyword)) {
+                    let destinationUrl = serviceMap[keyword];
+                    if (locationQuery) {
+                        destinationUrl += '?location=' + encodeURIComponent(locationQuery);
+                    }
+                    window.location.href = destinationUrl;
+                    pageFound = true;
+                    break;
+                }
+            }
+            if (!pageFound && serviceQuery) {
+                messageEl.textContent = "Sorry, we couldn't find services for '" + serviceQuery + "'.";
+            } else if (!serviceQuery) {
+                messageEl.textContent = "Please enter a service you are looking for.";
+            }
+        });
+        new Swiper('.worker-swiper', { loop: true, slidesPerView: 1, spaceBetween: 30, pagination: { el: '.swiper-pagination', clickable: true }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, 1280: { slidesPerView: 4 } } });
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.section-fade-in').forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
